@@ -1,0 +1,199 @@
+[gd_scene load_steps=6 format=3 uid="uid://deu7ciwwpxng8"]
+
+[ext_resource type="Texture2D" uid="uid://cxp5pp6dg76b" path="res://drop_items/assets/gold.png" id="1_clncs"]
+[ext_resource type="Script" path="res://ui/game_ui.gd" id="1_d4we8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vcd0k"]
+bg_color = Color(0.149999, 0.148589, 0.171835, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g8ufg"]
+bg_color = Color(0.923235, 0.401584, 0.51815, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vd657"]
+bg_color = Color(0.230061, 0.698164, 0.475739, 1)
+
+[node name="game_ui" type="CanvasLayer"]
+script = ExtResource("1_d4we8")
+
+[node name="status" type="MarginContainer" parent="."]
+offset_top = 35.0
+offset_right = 612.0
+offset_bottom = 300.0
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="status"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="hp_value" type="MarginContainer" parent="status/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="status/VBoxContainer/hp_value"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="status/VBoxContainer/hp_value/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "HP:
+"
+
+[node name="hp_value_bar" type="ProgressBar" parent="status/VBoxContainer/hp_value/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_vcd0k")
+theme_override_styles/fill = SubResource("StyleBoxFlat_g8ufg")
+value = 50.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="status/VBoxContainer/hp_value/HBoxContainer/hp_value_bar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -11.5
+offset_right = 26.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+text = "50/100"
+
+[node name="ColorRect" type="ColorRect" parent="status/VBoxContainer/hp_value/HBoxContainer/hp_value_bar"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="exp_value" type="MarginContainer" parent="status/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="status/VBoxContainer/exp_value"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="status/VBoxContainer/exp_value/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "EXP:
+"
+
+[node name="exp_value_bar" type="ProgressBar" parent="status/VBoxContainer/exp_value/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_vcd0k")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vd657")
+value = 50.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="status/VBoxContainer/exp_value/HBoxContainer/exp_value_bar"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -17.5
+offset_right = -13.0
+offset_bottom = 17.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+text = "LV.30"
+horizontal_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="status/VBoxContainer/exp_value/HBoxContainer/exp_value_bar"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="other" type="MarginContainer" parent="status/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ColorRect" type="ColorRect" parent="status/VBoxContainer/other"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="status/VBoxContainer/other/ColorRect"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.341388, 0.113913, 0.379477, 1)
+
+[node name="gold" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 70.0
+offset_top = -298.0
+offset_right = 162.0
+offset_bottom = -243.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "1000"
+
+[node name="Control" type="Control" parent="gold"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="gold/Control"]
+position = Vector2(-25, 0)
+scale = Vector2(4.3125, 4.3125)
+texture = ExtResource("1_clncs")
