@@ -1,24 +1,28 @@
-extends CharacterBody2D
+extends Player
 
 @onready var playerAni:AnimatedSprite2D = $playerAni
 
 var dir = Vector2.ZERO
-var speed = 700
 var flip = false
 var canMove = true
 var stop = false
-
-var now_hp = 100
-var max_hp = 100
-var max_exp = 5
-var now_exp = 0
-var level = 1
-var gold = 0
+var level_add_num = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	init_attr()
 	choosePlayer("player2")
 	pass # Replace with function body.
+
+func init_attr():
+	speed = 600
+	now_hp = 10
+	max_hp = 10
+	max_exp = 5
+	exp = 0
+	level = 1
+	gold = 0
+	pass
 
 func choosePlayer(type):
 	var player_path = "res://player/assets/"

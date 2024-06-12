@@ -29,3 +29,7 @@ func random_tile():
 		var num = ran.randi_range(0,100)
 		if(num < 2):
 			tilemap.set_cell(1, cell_pos, 1,Vector2i(5,2))			
+
+
+func _on_game_ui_round_end():
+	pass # Replace with function body.

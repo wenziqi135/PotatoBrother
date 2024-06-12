@@ -123,3 +123,5 @@ position = Vector2(949, 556)
 [node name="now_enemies" parent="." instance=ExtResource("4_tupml")]
 
 [node name="game_ui" parent="." instance=ExtResource("5_x5uth")]
+
+[connection signal="round_end" from="game_ui" to="." method="_on_game_ui_round_end"]
