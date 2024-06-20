@@ -1,0 +1,90 @@
+[gd_scene load_steps=11 format=3 uid="uid://xj0tnxpjmq05"]
+
+[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_4foqw"]
+[ext_resource type="Texture2D" uid="uid://ukocgkju5en7" path="res://Resources/enemy-sheet.png" id="1_yii8u"]
+
+[sub_resource type="Shader" id="Shader_kyaqh"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform vec4 flash_color:source_color = vec4(1.0);
+uniform float flash_opacity:hint_range(0.0, 1.0, 0.1) = 0.0;
+
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	color.rgb = mix(color.rgb, flash_color.rgb, flash_opacity);
+	COLOR = color;
+	
+	// Called for every pixel the material is visible on.
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qupax"]
+resource_local_to_scene = true
+shader = SubResource("Shader_kyaqh")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_opacity = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5wjq"]
+atlas = ExtResource("1_yii8u")
+region = Rect2(0, 0, 240, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpo8h"]
+atlas = ExtResource("1_yii8u")
+region = Rect2(240, 0, 240, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8vc2"]
+atlas = ExtResource("1_yii8u")
+region = Rect2(480, 0, 240, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21g3l"]
+atlas = ExtResource("1_yii8u")
+region = Rect2(720, 0, 240, 240)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o5t7q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5wjq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpo8h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8vc2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21g3l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nldue"]
+radius = 90.0
+height = 216.0
+
+[node name="enemy" type="CharacterBody2D" groups=["enemy"]]
+z_index = 14
+scale = Vector2(0.6, 0.6)
+collision_layer = 8
+collision_mask = 10
+script = ExtResource("1_4foqw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_qupax")
+sprite_frames = SubResource("SpriteFrames_o5t7q")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_nldue")

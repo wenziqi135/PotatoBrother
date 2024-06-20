@@ -1,16 +1,56 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2wxv8c2rshvh"]
+[gd_scene load_steps=11 format=3 uid="uid://c2wxv8c2rshvh"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_uyd3b"]
+[ext_resource type="PackedScene" uid="uid://degrw8qd148lj" path="res://weapon/now_weapons.tscn" id="2_ptqxp"]
+[ext_resource type="Texture2D" uid="uid://177km22xppm2" path="res://player/assets/player1/player1-sheet.png" id="2_yxic8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ouyw5"]
+atlas = ExtResource("2_yxic8")
+region = Rect2(0, 0, 240, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qba8"]
+atlas = ExtResource("2_yxic8")
+region = Rect2(240, 0, 240, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erpat"]
+atlas = ExtResource("2_yxic8")
+region = Rect2(480, 0, 240, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_co7rb"]
+atlas = ExtResource("2_yxic8")
+region = Rect2(720, 0, 240, 240)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k06d5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ouyw5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qba8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_erpat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_co7rb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_grm84"]
-radius = 88.0
-height = 236.0
+radius = 118.462
+height = 292.308
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2tnqy"]
+radius = 500.0
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 z_index = 20
 scale = Vector2(0.65, 0.65)
+collision_mask = 3
 script = ExtResource("1_uyd3b")
 
 [node name="playerAni" type="AnimatedSprite2D" parent="."]
@@ -27,9 +67,23 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
 [node name="stop" type="Area2D" parent="."]
+collision_mask = 24
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="stop"]
 shape = SubResource("CapsuleShape2D_grm84")
+debug_color = Color(0.984694, 0.310547, 0.417908, 0.929412)
 
+[node name="now_weapons" parent="." instance=ExtResource("2_ptqxp")]
+
+[node name="drop_item_area" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="drop_item_area"]
+shape = SubResource("CircleShape2D_2tnqy")
+debug_color = Color(0.598074, 0.544194, 0.0159831, 0.42)
+
+[connection signal="body_entered" from="stop" to="." method="_on_stop_body_entered"]
 [connection signal="mouse_entered" from="stop" to="." method="_on_stop_mouse_entered"]
 [connection signal="mouse_exited" from="stop" to="." method="_on_stop_mouse_exited"]
+[connection signal="body_entered" from="drop_item_area" to="." method="_on_drop_item_area_body_entered"]
